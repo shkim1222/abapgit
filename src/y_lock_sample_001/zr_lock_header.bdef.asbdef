@@ -1,0 +1,30 @@
+managed implementation in class zbp_r_lock_header unique;
+with draft;
+
+define behavior for ZR_LOCK_HEADER alias lockobject
+persistent table zlock_header
+draft table zlock_header_df
+lock master
+total etag Locallastchangedat
+etag master Lastchangedat
+//authorization master ( instance )
+{
+  create;
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Discard;
+
+  field( numbering : managed, readonly )
+  uuid;
+
+  mapping for zlock_header
+  {
+    Age = age;
+    Name = name;
+    Uuid = uuid;
+    Lastchangedat = lastchangedat;
+    Locallastchangedat = locallastchangedat;
+  }
+}

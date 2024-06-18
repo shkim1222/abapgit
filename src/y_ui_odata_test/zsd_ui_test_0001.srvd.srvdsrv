@@ -1,0 +1,4 @@
+@EndUserText.label: 'dd'
+define service ZSD_UI_TEST_0001 {
+  expose ZR_SAMPLE_0001;
+}

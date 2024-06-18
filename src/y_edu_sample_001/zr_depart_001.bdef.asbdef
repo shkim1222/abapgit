@@ -1,0 +1,26 @@
+managed implementation in class zbp_r_depart_001 unique;
+strict ( 2 );
+
+define behavior for ZR_DEPART_001 alias Depart
+persistent table zedu_depart_001
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+
+  field (numbering : managed, readonly ) Uuid;
+  determination init_code on save { create; }
+  validation check_value on save { create; update; }
+
+  mapping for zedu_depart_001
+  {
+    DeptCode = dept_code;
+    DeptDesc = dept_desc;
+    EndDate = end_date;
+    StrDate = str_date;
+    Uuid = uuid;
+  }
+}

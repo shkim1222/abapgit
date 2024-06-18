@@ -1,0 +1,6 @@
+@EndUserText.label: 'Service definition'
+define service ZSD_Header {
+  expose zc_item;
+  expose zc_header;
+  expose zc_attachment;
+}

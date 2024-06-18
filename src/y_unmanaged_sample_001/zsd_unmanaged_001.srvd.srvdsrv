@@ -1,0 +1,4 @@
+@EndUserText.label: 'unmanaged 001'
+define service ZSD_UNMANAGED_001 {
+  expose ZC_UNMANAGED_001;
+}

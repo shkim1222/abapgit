@@ -1,0 +1,26 @@
+managed implementation in class zbp_r_sample_0001 unique;
+strict ( 2 );
+
+define behavior for ZR_SAMPLE_0001 //alias <alias_name>
+persistent table ztest_001
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+
+  field ( numbering : managed, readonly ) Uuid;
+
+  action action1;
+  action action2 result [1] $self;
+  static action action3 parameter zst_para_01 result [1] $self;
+  validation onVali on save { create; }
+
+  mapping for ztest_001 {
+    Uuid = uuid;
+    OrderId = order_id;
+  }
+
+}

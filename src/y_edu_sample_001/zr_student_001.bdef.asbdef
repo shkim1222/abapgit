@@ -1,0 +1,29 @@
+managed implementation in class zbp_r_student_001 unique;
+//strict ( 2 );
+
+define behavior for ZR_STUDENT_001 alias Student
+persistent table zedu_student_001
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+
+  field (numbering : managed, readonly ) Uuid;
+  determination init_code on save { create; }
+  validation check_value on save { create; update;}
+
+  mapping for zedu_student_001{
+    EndDate = end_date;
+    StrDate = str_date;
+    StudCode = stud_code;
+    StudDesc = stud_desc;
+    StudNumb = stud_numb;
+    Uuid = uuid;
+    StudDeptCode = stud_dept_code;
+    StudDeptDesc = stud_dept_desc;
+
+  }
+}

@@ -1,0 +1,6 @@
+@EndUserText.label: 'csv upload service definition'
+define service ZSD_CSV_UPLOAD_004 {
+  expose ZC_ATT_004;
+  expose ZC_HEADER_004;
+  expose ZC_ITEM_004;
+}

@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service definition for ZC_TABLE_001'
+define service ZUI_TABLE_001_O4 {
+  expose ZC_TABLE_001;
+}

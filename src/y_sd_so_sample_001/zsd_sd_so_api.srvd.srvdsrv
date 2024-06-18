@@ -1,0 +1,7 @@
+@EndUserText.label: '[SD] Create Sales Order API '
+define service ZSD_SD_SO_API {
+  expose ZR_SD_SO_HEADER  as SalesOrder;
+  expose ZR_SD_SO_ITEM    as Item;
+  expose ZR_SD_SO_PAYMENT as ZPayment;
+  expose ZR_SD_SO_PARTNER as Partner;
+}

@@ -1,0 +1,5 @@
+@EndUserText.label: '[FI] Create Journal Entries API'
+define service ZSD_FI_JE_01 {
+  expose ZR_FI_JE_HEADER;
+  expose ZR_FI_JE_ITEM;
+}

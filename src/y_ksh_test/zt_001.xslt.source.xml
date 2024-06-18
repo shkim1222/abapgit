@@ -1,0 +1,16 @@
+<?sap.transform simple?>
+<tt:transform xmlns:tt="http://www.sap.com/transformation-templates">
+
+<tt:root name="ROOT"/>
+
+<tt:template>
+ <header>
+        <field1>
+          <tt:value ref="ROOT.FIELD1"/>
+        </field1>
+        </header>
+
+</tt:template>
+
+</tt:transform>
+

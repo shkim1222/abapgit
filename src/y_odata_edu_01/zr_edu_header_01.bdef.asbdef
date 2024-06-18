@@ -1,0 +1,22 @@
+managed implementation in class zbp_r_edu_header_01 unique;
+//strict ( 2 );
+
+define behavior for ZR_EDU_HEADER_01 //alias <alias_name>
+persistent table zedu_header_01
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+
+  field (numbering : managed, readonly ) Uuid;
+
+  mapping for zedu_header_01{
+    Age = age;
+    Name = name;
+    Uuid = uuid;
+  }
+
+}

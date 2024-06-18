@@ -1,0 +1,89 @@
+managed implementation in class zbp_i_att_004 unique;
+with draft;
+
+define behavior for ZI_Att_004 alias Attachment
+persistent table zatt_004
+draft table zatt_draft_004
+lock master
+total etag Locallastchangedat
+etag master Lastchangedat
+authorization master ( instance )
+{
+  create;
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  action Upload ;
+
+  field ( numbering : managed, readonly ) AttachId;
+  association _Header { create; with draft; }
+
+  mapping for zatt_004
+  {
+    AttachId = attach_id;
+    Attachment = attachment;
+    Comments = comments;
+    Filename = filename;
+    Lastchangedat = lastchangedat;
+    Locallastchangedat = locallastchangedat;
+    Mimetype = mimetype;
+    Status = status;
+  }
+}
+
+define behavior for ZI_HEADER_004 alias Header
+persistent table zheader_004
+draft table zhe_draft_004
+lock dependent by _Attachment
+etag master LastChangedat
+authorization dependent by _Attachment
+{
+  update;
+  delete;
+  field ( readonly ) AttachId;
+  field ( numbering : managed, readonly ) SoUuid;
+
+  association _Attachment { with draft; }
+  association _Items { create; with draft;}
+
+  mapping for zheader_004{
+        AttachId = attach_id;
+        Distributionchannel = distributionchannel;
+        Salesordertype = salesordertype;
+        Salesorganization = salesorganization;
+        SoUuid = so_uuid;
+        Soldtoparty = soldtoparty;
+    }
+}
+
+define behavior for ZI_ITEM_004 alias Items
+persistent table zitem_004
+draft table zitem_draft_004
+etag master Lastchangedat
+lock dependent by _Attachment
+authorization dependent by _Attachment
+{
+  update;
+  delete;
+
+  field ( readonly ) AttachId;
+  field ( readonly ) OrderUuid;
+  field ( numbering : managed, readonly ) ItemUuid;
+  association _Header { with draft; }
+  association _Attachment { with draft; }
+
+  mapping for zitem_004{
+    ItemUuid = item_uuid;
+    Material = material;
+    OrderUuid = order_uuid;
+    Requestedquantity = requestedquantity;
+    Requestedquantityunit = requestedquantityunit;
+    Salesorderitem = salesorderitem;
+  }
+}

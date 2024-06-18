@@ -1,0 +1,40 @@
+managed implementation in class ZBP_R_TABLE_001 unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZR_TABLE_001
+persistent table ztable_001
+draft table ZTABLE_001_D
+etag master Locallastchanged
+lock master total etag Lastchanged
+authorization master( global )
+
+{
+  field ( readonly )
+   UUID,
+   Lastchanged,
+   Locallastchanged;
+
+  field ( numbering : managed )
+   UUID;
+
+
+  //create;
+  //update;
+  //delete;
+
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for ZTABLE_001
+  {
+    UUID = uuid;
+    Name = name;
+    Age = age;
+    Locallastchanged = locallastchanged;
+    Lastchanged = lastchanged;
+  }
+}

@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service definition'
+define service ZSD_CC_SAMPLE_001 {
+  expose ZC_CC_001;
+  expose ZI_CC_001;
+}

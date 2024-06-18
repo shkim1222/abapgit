@@ -1,0 +1,5 @@
+@EndUserText.label: 'header test'
+define service ZSD_HEADER_O2_TEST_0001 {
+  expose ZR_HEADER_0001;
+  expose ZR_ITEM_0001;
+}

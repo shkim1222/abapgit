@@ -1,0 +1,36 @@
+managed implementation in class zbp_r_header_0001 unique;
+strict ( 2 );
+
+define behavior for ZR_HEADER_0001 //alias <alias_name>
+persistent table zheader_0001
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+  association _Item { create; }
+
+  field ( numbering : managed, readonly ) uuid;
+
+//  action test001 result [1..*] $self;
+  action test001 result [1] $self;
+  validation checkVali on save { create; }
+
+}
+
+define behavior for ZR_ITEM_0001 //alias <alias_name>
+persistent table zitem_0001
+lock dependent by _Header
+authorization dependent by _Header
+//etag master <field_name>
+{
+  update;
+  delete;
+  field ( readonly ) HeaderUuid;
+  association _Header;
+
+  field ( numbering : managed, readonly ) uuid;
+
+}

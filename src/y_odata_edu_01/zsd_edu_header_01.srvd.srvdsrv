@@ -1,0 +1,4 @@
+@EndUserText.label: 'header'
+define service ZSD_EDU_HEADER_01 {
+  expose ZR_EDU_HEADER_01;
+}

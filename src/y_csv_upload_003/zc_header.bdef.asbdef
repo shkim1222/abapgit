@@ -1,0 +1,36 @@
+projection;
+use draft;
+
+define behavior for zc_header //alias <alias_name>
+{
+  use create;
+  use update;
+  use delete;
+
+    use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+
+
+  use association _Items { create; with draft; }
+  use association _Attachments { create; with draft; }
+}
+
+define behavior for zc_item //alias <alias_name>
+{
+  use update;
+  use delete;
+
+  use association _Header { with draft; }
+}
+
+define behavior for zc_attachment //alias <alias_name>
+{
+  use update;
+  use delete;
+
+  use action Upload;
+  use association _Header { with draft; }
+}

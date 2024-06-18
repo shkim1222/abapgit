@@ -1,0 +1,4 @@
+@EndUserText.label: 'header 02'
+define service ZSD_HEADER_O2_UI_001 {
+  expose ZC_HEADER_001;
+}

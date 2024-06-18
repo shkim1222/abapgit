@@ -1,0 +1,21 @@
+CLASS zcl_qt_header_sample_001 DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
+
+  PUBLIC SECTION.
+
+    INTERFACES if_badi_interface .
+    INTERFACES if_sd_sls_modify_head .
+  PROTECTED SECTION.
+  PRIVATE SECTION.
+ENDCLASS.
+
+
+
+CLASS ZCL_QT_HEADER_SAMPLE_001 IMPLEMENTATION.
+
+
+  METHOD if_sd_sls_modify_head~modify_fields.
+  ENDMETHOD.
+ENDCLASS.

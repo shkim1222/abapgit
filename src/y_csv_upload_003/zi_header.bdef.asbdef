@@ -1,0 +1,84 @@
+managed implementation in class zbp_i_header unique;
+with draft;
+
+define behavior for Zi_Header alias Header
+persistent table zheader
+draft table zheader_draft
+lock master
+total etag Locallastchangedat
+//authorization master ( instance )
+etag master Lastchangedat
+{
+  create;
+  update;
+  delete;
+  association _Items { create; with draft; }
+  association _Attachments { create; with draft; }
+
+    draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  field ( numbering : managed, readonly ) SoUuid;
+
+  mapping for zheader{
+      Distributionchannel = distributionchannel;
+      Lastchangedat = lastchangedat;
+      Locallastchangedat = locallastchangedat;
+      Salesordertype = salesordertype;
+      Salesorganization = salesorganization;
+      SoUuid = so_uuid;
+      Soldtoparty = soldtoparty;
+  }
+}
+
+define behavior for Zi_Item alias Items
+persistent table zitem
+draft table zitem_draft
+lock dependent by _Header
+//authorization dependent by _Header
+etag master LastChangedat
+{
+  update;
+  delete;
+  field ( readonly ) OrderUuid;
+  field ( numbering : managed, readonly ) ItemUuid;
+  association _Header { with draft; }
+
+  mapping for zitem{
+    ItemUuid = item_uuid;
+    Material = material;
+    OrderUuid = order_uuid;
+    Requestedquantity = requestedquantity;
+    Requestedquantityunit = requestedquantityunit;
+    Salesorderitem = salesorderitem;
+  }
+}
+
+define behavior for Zi_Attachment alias Attachments
+persistent table zattachment2
+draft table zatt_draft
+lock dependent by _Header
+//authorization dependent by _Header
+etag master LastChangedat
+{
+  update;
+  delete;
+  field ( readonly ) OrderUuid;
+  field ( numbering : managed, readonly ) AttachId;
+
+  association _Header { with draft; }
+
+  action Upload;
+
+  mapping for zattachment2{
+   AttachId = attach_id;
+   Attachment = attachment;
+   Comments = comments;
+   Filename = filename;
+   Mimetype = mimetype;
+   OrderUuid = order_uuid;
+  }
+}

@@ -1,0 +1,23 @@
+managed implementation in class zbp_i_cc_001 unique;
+//strict ( 2 );
+
+define behavior for ZI_CC_001 //alias <alias_name>
+persistent table zcc_001
+lock master
+//authorization master ( instance )
+etag master Localinstancelastchangedat
+{
+  create;
+  update;
+  delete;
+
+  field ( numbering : managed, readonly ) Uuid;
+
+  mapping for zcc_001{
+    //Createby = createby;
+    Createdat = createdat;
+    //Lastchangedby = lastchangedby;
+    Localinstancelastchangedat = localinstancelastchangedat;
+    Uuid = uuid;
+  }
+}

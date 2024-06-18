@@ -1,0 +1,13 @@
+unmanaged implementation in class zbp_r_unmanaged_002 unique;
+//strict ( 2 );
+
+define behavior for ZR_UNMANAGED_002 //alias <alias_name>
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+
+}

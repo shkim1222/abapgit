@@ -1,0 +1,60 @@
+managed implementation in class zbp_r_fi_je_header unique;
+strict ( 2 );
+
+define behavior for ZR_FI_JE_HEADER alias Header
+persistent table zfi_je_header
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+
+  field ( numbering : managed, readonly ) uuid;
+
+  determination create_je on save { create; }
+
+  association _Item { create; }
+
+  mapping for zfi_je_header
+    {
+      AccountingDocumentType  = accountingdocumenttype;
+      BusinessTransactionType = businesstransactiontype;
+      CompanyCode             = companycode;
+      DocumentDate            = documentdate;
+      PostingDate             = postingdate;
+      ReferenceDocumentType   = referencedocumenttype;
+      Uuid                    = uuid;
+      Document                = document;
+      IFMsg                   = ifmsg;
+      IFStatus                = ifstatus;
+    }
+}
+
+define behavior for ZR_FI_JE_ITEM //alias <alias_name>
+persistent table zfi_je_item
+lock dependent by _Header
+authorization dependent by _Header
+//etag master <field_name>
+{
+  update;
+  delete;
+
+  field ( readonly ) Uuid;
+  field ( numbering : managed, readonly ) Itemuuid;
+
+  association _Header;
+
+  mapping for zfi_je_item
+    {
+      Amountintransactioncurrency = amountintransactioncurrency;
+      Costcenter                  = costcenter;
+      AmountCurrency              = amountcurrency;
+      Debitcreditcode             = debitcreditcode;
+      Documentitemtext            = documentitemtext;
+      Glaccount                   = glaccount;
+      Itemuuid                    = itemuuid;
+      Uuid                        = uuid;
+    }
+}

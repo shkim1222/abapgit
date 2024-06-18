@@ -1,0 +1,5 @@
+@EndUserText.label: 'LOCK 테스트'
+define service ZSD_LOCK_01 {
+  expose ZC_LOCK_HEADER;
+  expose ZR_LOCK_HEADER;
+}

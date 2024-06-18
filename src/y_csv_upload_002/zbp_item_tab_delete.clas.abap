@@ -1,0 +1,21 @@
+CLASS zbp_item_tab_delete DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
+
+  PUBLIC SECTION.
+
+    INTERFACES if_oo_adt_classrun .
+  PROTECTED SECTION.
+  PRIVATE SECTION.
+ENDCLASS.
+
+
+
+CLASS ZBP_ITEM_TAB_DELETE IMPLEMENTATION.
+
+
+  METHOD if_oo_adt_classrun~main.
+    DELETE FROM zitem_tab.
+  ENDMETHOD.
+ENDCLASS.

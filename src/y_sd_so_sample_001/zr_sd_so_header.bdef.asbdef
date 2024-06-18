@@ -1,0 +1,117 @@
+managed implementation in class zbp_r_sd_so_header unique;
+//strict ( 2 );
+
+define behavior for ZR_SD_SO_HEADER alias SalesOrder
+persistent table zsd_so_header
+with additional save
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+  association _Item { create; }
+  association _Partner { create; }
+  association _Payment { create; }
+
+  determination calculate_order_id on save { create; }
+
+  field ( numbering : managed, readonly )
+  OrderUUID;
+
+  mapping for zsd_so_header
+    {
+      OrderUUID                 = orderuuid;
+      SenderBusinessSystemName  = senderbusinesssystemname;
+      PurchaseOrderByCustomer   = purchaseorderbycustomer;
+      SalesOrderType            = salesordertype;
+      SalesOrganization         = salesorganization;
+      DistributionChannel       = distributionchannel;
+      SoldToParty               = soldtoparty;
+      RequestedDeliveryDate     = requesteddeliverydate;
+      CustomerPurchaseOrderDate = customerpurchaseorderdate;
+      SalesOrderDate            = salesorderdate;
+      ConditionType             = conditiontype;
+      ConditionRateValue        = conditionratevalue;
+      ConditionCurrency         = conditioncurrency;
+      IFStatus                  = ifstatus;
+      ZSalesOrder               = zsalesorder;
+      IFMsg                     = ifmsg;
+    }
+
+}
+
+define behavior for ZR_SD_SO_ITEM //alias <alias_name>
+persistent table zsd_so_item
+lock dependent by _Header
+authorization dependent by _Header
+//etag master <field_name>
+{
+  update;
+  delete;
+  field ( readonly ) Orderuuid;
+
+  field ( numbering : managed, readonly ) Itemuuid;
+
+  association _Header;
+
+  mapping for zsd_so_item
+    {
+      ItemUUID              = itemuuid;
+      Material              = material;
+      OrderUUID             = orderuuid;
+      RequestedQuantity     = requestedquantity;
+      RequestedQuantityUnit = requestedquantityunit;
+      SalesOrderItem        = salesorderitem;
+    }
+}
+
+define behavior for ZR_SD_SO_PARTNER //alias <alias_name>
+persistent table zsd_so_partner
+lock dependent by _Header
+authorization dependent by _Header
+//etag master <field_name>
+{
+  update;
+  delete;
+  field ( readonly ) Orderuuid;
+
+  field ( numbering : managed, readonly ) Partneruuid;
+
+  association _Header;
+
+  mapping for zsd_so_partner
+    {
+      Customer        = customer;
+      OrderUUID       = orderuuid;
+      PartnerFunction = partnerfunction;
+      PartnerUUID     = partneruuid;
+    }
+}
+
+define behavior for ZR_SD_SO_PAYMENT //alias <alias_name>
+persistent table zsd_so_payment
+lock dependent by _Header
+authorization dependent by _Header
+//etag master <field_name>
+{
+  update;
+  delete;
+  field ( readonly ) OrderUuid;
+
+  field ( numbering : managed, readonly ) PaymentUuid;
+
+  association _Header;
+
+  mapping for zsd_so_payment
+    {
+      OrderUUID      = orderuuid;
+      PaymentUUID    = paymentuuid;
+      ZAmount        = zamount;
+      ZCurrency      = zcurrency;
+      ZPaymentMethod = zpaymentmethod;
+      ZSequence      = zsequence;
+    }
+
+}

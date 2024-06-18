@@ -1,0 +1,23 @@
+unmanaged implementation in class zbp_r_unmanaged_001 unique;
+strict ( 2 );
+
+define behavior for ZR_UNMANAGED_001 //alias <alias_name>
+//late numbering
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+
+  static action getData;
+  mapping for zunmanaged_001 {
+
+    Age = age;
+    Name = name;
+    Uuid = uuid;
+
+  }
+
+}

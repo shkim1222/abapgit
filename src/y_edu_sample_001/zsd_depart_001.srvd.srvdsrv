@@ -1,0 +1,5 @@
+@EndUserText.label: 'Depart 서비스'
+define service ZSD_DEPART_001 {
+  expose ZC_DEPART_001;
+  expose ZC_STUDENT_001;
+}

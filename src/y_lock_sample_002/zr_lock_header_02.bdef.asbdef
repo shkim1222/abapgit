@@ -1,0 +1,28 @@
+managed implementation in class zbp_r_lock_header_02 unique;
+strict( 2 );
+
+define behavior for ZR_LOCK_HEADER_02 alias lockobject
+persistent table zlock_header_02
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+
+ // action (features : instance ) lock result [1] $self;
+
+  field ( numbering : managed, readonly )
+  uuid;
+
+  mapping for zlock_header_02
+    {
+      Age                = age;
+      Lastchangedat      = lastchangedat;
+      Locallastchangedat = locallastchangedat;
+      Name               = name;
+      Uuid               = uuid;
+      flag               = flag;
+    }
+}
